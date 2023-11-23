@@ -1,6 +1,6 @@
 // src/Login.js
 import React, { useState } from 'react';
-import { Eye, EyeSlashFill } from 'react-bootstrap-icons'; //react icons
+import { Eye, EyeSlashFill } from 'react-bootstrap-icons'; // React Icons
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
@@ -14,7 +14,7 @@ const Login = ({ onLogin }) => {
       const response = await fetch('https://jsonplaceholder.typicode.com/users');
       const users = await response.json();
 
-      const user = users.find((u) => u.username === username && u.email === password);
+      const user = users.find((u) => u.username === username && u.address.zipcode === password);
 
       if (user) {
         onLogin(user);
@@ -52,7 +52,7 @@ const Login = ({ onLogin }) => {
             type={showPassword ? 'text' : 'password'}
             className="form-control"
             id="password"
-            placeholder="Enter your password"
+            placeholder="Enter your Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -62,7 +62,7 @@ const Login = ({ onLogin }) => {
               type="button"
               onClick={() => setShowPassword(!showPassword)}
             >
-             {showPassword ? <EyeSlashFill /> : <Eye />}
+              {showPassword ? <EyeSlashFill /> : <Eye />}
             </button>
           </div>
         </div>

@@ -1,47 +1,75 @@
 // src/App.js
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Button, Navbar } from 'react-bootstrap';
 import Login from './Login';
-
-const Profile = ({ user }) => {
-  return (
-    <div className="container mt-5">
-      <h2>User Profile</h2>
-      <div className="card">
-        <div className="card-body">
-          <h5 className="card-title">{user.name}</h5>
-          <p className="card-text">Username: {user.username}</p>
-          <p className="card-text">Email: {user.email}</p>
-          {/* Add more user details as needed */}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const ProfileSection = ({ user }) => {
-  return (
-    <div>
-      <Profile user={user} />
-      {/* Add additional profile-related components or sections here */}
-    </div>
-  );
-};
+import ProfileSection from './Profile';
+import HomePage from './Homepage';
+import Sidebar from './Sidebar';
+import './App.css';
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [activeTab, setActiveTab] = useState('feed');
+  const [isSidebarOpen, setSidebarOpen] = useState(true);
 
   const handleLogin = (loggedInUser) => {
     setUser(loggedInUser);
   };
 
+  const handleLogout = () => {
+    setUser(null);
+  };
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
   return (
-    <div>
-      {user ? (
-        <ProfileSection user={user} />
-      ) : (
-        <Login onLogin={handleLogin} />
-      )}
-    </div>
+    <Router>
+      <div>
+        <Navbar bg="light" expand="lg" className="fixed-top">
+          <Navbar.Brand href="#home">Your App Name</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            {user && (
+              <Button
+                variant="outline-primary"
+                onClick={toggleSidebar}
+                className="toggle-btn"
+              >
+                ☰ Toggle Sidebar
+              </Button>
+            )}
+          </Navbar.Collapse>
+        </Navbar>
+
+        <Routes>
+          <Route path="/profile" element={<ProfileSection user={user} onLogout={handleLogout} />} />
+          <Route path="/home" element={<HomePage />} />
+          
+        </Routes>
+
+        {user ? (
+          <div className="d-flex">
+            {user && <Sidebar isOpen={isSidebarOpen} />}
+            <div className={`flex-grow-1 ${user && isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+              {activeTab === 'feed' ? (
+                <HomePage />
+              ) : (
+                <ProfileSection user={user} onLogout={handleLogout} />
+              )}
+            </div>
+          </div>
+        ) : (
+          <Login onLogin={handleLogin} />
+        )}
+      </div>
+    </Router>
   );
 };
 
