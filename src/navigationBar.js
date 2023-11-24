@@ -40,17 +40,17 @@ const NavigationBar = ({ onTabChange }) => {
             <li className="nav-item">
               {/* Replace <a> with <Link> */}
               <Link to="/home" className="nav-link">
-                <HouseDoor size={24} className="mx-4" />
+                <HouseDoor size={24} className={`mx-4 ${activeTab === 'home' ? 'active' : ''}`} />
               </Link>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
-                <Bell size={24} className="mx-4" />
+                <Bell size={24} className={`mx-4 ${activeTab === 'bell' ? 'active' : ''}`} />
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
-                <Envelope size={24} className="mx-4" />
+                <Envelope size={24} className={`mx-4 ${activeTab === 'envelope' ? 'active' : ''}`} />
               </a>
             </li>
           </ul>

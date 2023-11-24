@@ -1,28 +1,39 @@
 // src/App.js
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Button, Navbar } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Login from './Login';
-import ProfileSection from './Profile';
+import Profile from './Profile';
 import HomePage from './Homepage';
 import Sidebar from './Sidebar';
+import Feed from './components/Feed';
+import PremiumMembership from './components/PremiumMembership';
 import './App.css';
 
 const App = () => {
   const [user, setUser] = useState(null);
-  const [activeTab, setActiveTab] = useState('feed');
   const [isSidebarOpen, setSidebarOpen] = useState(true);
+  const navigate = useNavigate();
+
+  // Check local storage for user data on component mount
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   const handleLogin = (loggedInUser) => {
     setUser(loggedInUser);
+    // Store user data in local storage
+    localStorage.setItem('user', JSON.stringify(loggedInUser));
   };
 
   const handleLogout = () => {
     setUser(null);
-  };
-
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
+    // Remove user data from local storage
+    localStorage.removeItem('user');
+    // Redirect to the login page after logout
+    navigate('/');
   };
 
   const toggleSidebar = () => {
@@ -30,46 +41,46 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <div>
-        <Navbar bg="light" expand="lg" className="fixed-top">
-          <Navbar.Brand href="#home">Your App Name</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            {user && (
-              <Button
-                variant="outline-primary"
-                onClick={toggleSidebar}
-                className="toggle-btn"
-              >
-                ☰ Toggle Sidebar
-              </Button>
-            )}
-          </Navbar.Collapse>
-        </Navbar>
-
-        <Routes>
-          <Route path="/profile" element={<ProfileSection user={user} onLogout={handleLogout} />} />
-          <Route path="/home" element={<HomePage />} />
-          
-        </Routes>
-
-        {user ? (
-          <div className="d-flex">
-            {user && <Sidebar isOpen={isSidebarOpen} />}
-            <div className={`flex-grow-1 ${user && isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
-              {activeTab === 'feed' ? (
-                <HomePage />
-              ) : (
-                <ProfileSection user={user} onLogout={handleLogout} />
-              )}
-            </div>
-          </div>
-        ) : (
-          <Login onLogin={handleLogin} />
-        )}
-      </div>
-    </Router>
+    <div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            user ? (
+              <div className="d-flex">
+                {user && <Sidebar isOpen={isSidebarOpen} />}
+                <div className={`flex-grow-1 ${user && isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+                  <HomePage />
+                </div>
+              </div>
+            ) : (
+              <Login onLogin={handleLogin} />
+            )
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            user ? (
+              <div className="d-flex">
+                {user && <Sidebar isOpen={isSidebarOpen} />}
+                <div className={`flex-grow-1 ${user && isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+                  <Profile user={user} onLogout={handleLogout} />
+                </div>
+              </div>
+            ) : null
+          }
+        />
+        <Route
+          path="/premium-membership"
+          element={
+            user && !user.isPremium ? (
+              <PremiumMembership />
+            ) : null
+          }
+        />
+      </Routes>
+    </div>
   );
 };
 

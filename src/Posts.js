@@ -7,8 +7,8 @@ const Posts = ({ userId }) => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        // Replace 'YOUR_API_ENDPOINT' with the actual JSONPlaceholder API endpoint for posts.
-        const response = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`);
+        // JSONPlaceholder API endpoint for posts.
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
         const posts = await response.json();
         setUserPosts(posts);
       } catch (error) {
@@ -33,5 +33,4 @@ const Posts = ({ userId }) => {
     </div>
   );
 };
-
 export default Posts;
