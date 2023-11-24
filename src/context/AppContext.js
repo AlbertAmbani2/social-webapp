@@ -1,6 +1,18 @@
-// src/context/AppContext.js
-import { createContext } from 'react';
+// context/AppContext.js
+import React, { createContext, useContext, useState } from 'react';
 
-const AppContext = createContext();
+export const AppContext = createContext();  // Named export
 
-export default AppContext;
+export const AppProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
+  return (
+    <AppContext.Provider value={{ user, setUser }}>
+      {children}
+    </AppContext.Provider>
+  );
+};
+
+export const useAppContext = () => {
+  return useContext(AppContext);
+};

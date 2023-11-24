@@ -1,17 +1,18 @@
-// src/Sidebar.js
+// Sidebar.js
 import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Bell, Envelope, Person } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen }) => {
+  const sidebarClass = isOpen ? 'sidebar-open' : 'sidebar-closed';
+
   return (
-    <Navbar expand="lg" bg="light" variant="light" className="fixed-left">
-      <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+    <Navbar expand="lg" bg="light" variant="light" className={`fixed-left ${sidebarClass}`}>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="flex-column">
-
-        <Nav.Link as={Link} to="/Profile">
+          <Nav.Link as={Link} to="/Profile">
             <Person size={24} className="mx-4" />
             Profile
           </Nav.Link>

@@ -29,48 +29,53 @@ const Login = ({ onLogin }) => {
 
   return (
     <div className="container mt-5">
-      <h2>Login</h2>
-      <div className="mb-3">
-        <label htmlFor="username" className="form-label">
-          Username
-        </label>
-        <input
-          type="text"
-          className="form-control"
-          id="username"
-          placeholder="Enter your username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+      <div className="card p-3 mx-auto" style={{ maxWidth: '400px' }}>
+      <div className="text-center mb-3">
+        <i>Social Web-App</i>
       </div>
-      <div className="mb-3">
-        <label htmlFor="password" className="form-label">
-          Password
-        </label>
-        <div className="input-group">
+        <h2 className="text-center">Login</h2>
+        <div className="mb-3">
+          <label htmlFor="username" className="form-label">
+            Username
+          </label>
           <input
-            type={showPassword ? 'text' : 'password'}
+            type="text"
             className="form-control"
-            id="password"
-            placeholder="Enter your Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            id="username"
+            placeholder="Enter your username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
-          <div className="input-group-append">
-            <button
-              className="btn btn-outline-secondary"
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <EyeSlashFill /> : <Eye />}
-            </button>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <div className="input-group">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              className="form-control"
+              id="password"
+              placeholder="Enter your Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div className="input-group-append">
+              <button
+                className="btn btn-outline-secondary"
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <EyeSlashFill /> : <Eye />}
+              </button>
+            </div>
           </div>
         </div>
+        {error && <div className="alert alert-danger">{error}</div>}
+        <button className="btn btn-primary btn-block" onClick={handleLogin}>
+          Login
+        </button>
       </div>
-      {error && <div className="alert alert-danger">{error}</div>}
-      <button className="btn btn-primary" onClick={handleLogin}>
-        Login
-      </button>
     </div>
   );
 };

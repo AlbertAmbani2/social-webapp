@@ -21,7 +21,7 @@ const Posts = ({ userId }) => {
 
   return (
     <div>
-      <h3 className="mb-3">Posts</h3>
+      
       {userPosts.map((post) => (
         <div key={post.id} className="card mb-3">
           <div className="card-body">

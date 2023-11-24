@@ -1,7 +1,8 @@
 // src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';  
+import { AppProvider } from './context/AppContext';
+import { BrowserRouter as Router} from 'react-router-dom';  
 import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
@@ -9,9 +10,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //Router ensures the URL matches the UI
 
 ReactDOM.render(
-  <BrowserRouter>
+   <AppProvider>
+  <Router>
     <App />
-  </BrowserRouter>,
+  </Router>
+    </AppProvider> ,
   document.getElementById('root')
 );
 
