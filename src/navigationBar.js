@@ -9,12 +9,12 @@ const NavigationBar = ({ onTabChange }) => {
   const { activeTab, handleTabChange } = useTabs('feed');
 
   return (
-    <div>
+    <div className="container-fluid">
       {/* Top navigation bar */}
-      <Card className="navbar fixed-top navbar-light bg-light">
-        <Card.Body className="text-center">
+      <Card className="navbar navbar-light bg-light mb-3">
+        <Card.Body className="text-center container">
           <Card.Title></Card.Title>
-          <ButtonGroup className="mb-3 position-relative">
+          <ButtonGroup className="position-relative">
             <Button
               variant={activeTab === 'feed' ? 'secondary' : 'light'}
               onClick={() => handleTabChange('feed')}
@@ -32,9 +32,21 @@ const NavigationBar = ({ onTabChange }) => {
           </ButtonGroup>
         </Card.Body>
       </Card>
+      
+     {/* Main content of the home page */}
+      <div className="bg-light p-4 rounded">
+            <h2 className="mb-4">News Feed</h2>
+            {/* Add your content here */}
+            <div className="card mb-3">
+              <div className="card-body">
+                <p className="card-text">Sample post content...</p>
+              </div>
+            </div>
+            {/* Add more posts as needed */}
+          </div>
 
       {/* Bottom navigation bar */}
-      <nav className="navbar fixed-bottom navbar-light bg-light">
+      <nav className="navbar navbar-light bg-light">
         <div className="container-fluid">
           <ul className="navbar-nav flex-row justify-content-between w-100">
             <li className="nav-item">

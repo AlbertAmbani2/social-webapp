@@ -4,14 +4,11 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import Login from './Login';
 import Profile from './Profile';
 import HomePage from './Homepage';
-import Sidebar from './Sidebar';
-import Feed from './components/Feed';
 import PremiumMembership from './components/PremiumMembership';
 import './App.css';
 
 const App = () => {
   const [user, setUser] = useState(null);
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
   const navigate = useNavigate();
 
   // Check local storage for user data on component mount
@@ -36,10 +33,6 @@ const App = () => {
     navigate('/');
   };
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
-
   return (
     <div>
       <Routes>
@@ -47,30 +40,26 @@ const App = () => {
           path="/"
           element={
             user ? (
-              <div className="d-flex">
-                {user && <Sidebar isOpen={isSidebarOpen} />}
-                <div className={`flex-grow-1 ${user && isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
-                  <HomePage />
-                </div>
+              <div className="flex-grow-1">
+                <HomePage />
               </div>
             ) : (
               <Login onLogin={handleLogin} />
             )
           }
         />
+
         <Route
           path="/profile"
           element={
             user ? (
-              <div className="d-flex">
-                {user && <Sidebar isOpen={isSidebarOpen} />}
-                <div className={`flex-grow-1 ${user && isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
-                  <Profile user={user} onLogout={handleLogout} />
-                </div>
+              <div className="flex-grow-1">
+                <Profile user={user} onLogout={handleLogout} />
               </div>
             ) : null
           }
         />
+
         <Route
           path="/premium-membership"
           element={
@@ -80,7 +69,7 @@ const App = () => {
           }
         />
       </Routes>
-      </div>
+    </div>
   );
 };
 
