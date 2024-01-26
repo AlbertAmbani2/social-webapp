@@ -1,2 +1,35 @@
+/* sidebar.css */
+.sidebar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 300px;
+  height: 100%; /* Set height to 100% to cover the whole screen */
+  padding: 20px;
+  background-color: #343a40; /* Add a background color for the sidebar */
+  transition: transform 0.3s ease-in-out;
+}
 
+.toggle-btn-container {
+  margin-right: 10px;
+  display: block;
+}
+
+/* Style for the toggle button */
+.toggle-btn-container Button {
+  background: #343a40; /* Match the sidebar background color */
+  color: #fff; /* Text color for the button */
+  border: none;
   
+}
+
+@media (max-width: 768px) {
+  .sidebar-container {
+    transform: translateX(-100%);
+  }
+
+  .sidebar-container.open {
+    transform: translateX(0);
+  }
+}

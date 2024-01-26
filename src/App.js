@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Login from './Login';
-import Profile from './Profile';
-import HomePage from './Homepage';
+import Profile from './routes/Profile';
+import HomePage from './routes/Homepage';
 import PremiumMembership from './components/PremiumMembership';
 import './App.css';
 

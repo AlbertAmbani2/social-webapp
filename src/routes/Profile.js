@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'react-bootstrap-icons';
-import Posts from './Posts';
-import UsersList from './usersList';
+import Posts from '../Posts';
+import UsersList from '../usersList';
+import '../NavigationBar.css';
 
 const Profile = ({ user, onLogout }) => {
   const [userPosts, setUserPosts] = useState([]);

@@ -1,23 +1,25 @@
 // Layout.js
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import React, { useState } from 'react';
+import NavigationBar from './NavigationBar';
+import Sidebar from './Sidebar';
 
-const Layout = ({ user, isSidebarOpen, children }) => {
+const Layout = () => {
+  const [isSidebarOpen, setSidebarOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
   return (
-    <Container fluid>
-      <Row>
-        <Col xs={12} md={user ? 3 : 12} lg={user ? 2 : 12} className={`p-0 ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
-          {/* Sidebar */}
-          {user && children[0]}
-        </Col>
-
-        <Col xs={12} md={user ? 9 : 12} lg={user ? 10 : 12} className="p-0">
-          {/* Main Content including Navbar */}
-          {children[1]}
-        </Col>
-      </Row>
-    </Container>
+    <div className="d-flex">
+      <Sidebar isOpen={isSidebarOpen} />
+      <div className={`flex-grow-1 ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+        <NavigationBar toggleSidebar={toggleSidebar} />
+        {/* Add other content components here */}
+      </div>
+    </div>
   );
 };
 
 export default Layout;
+
