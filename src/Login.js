@@ -9,6 +9,7 @@ const Login = ({ onLogin }) => {
   const [error, setError] = useState('');
 
   const handleLogin = async () => {
+    
     try {
       // Replace 'YOUR_API_ENDPOINT' with the actual JSONPlaceholder API endpoint for users.
       const response = await fetch('https://jsonplaceholder.typicode.com/users');
@@ -62,7 +63,7 @@ const Login = ({ onLogin }) => {
             />
             <div className="input-group-append">
               <button
-                className="btn btn-outline-secondary"
+                className="btn btn-outline"
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
               >

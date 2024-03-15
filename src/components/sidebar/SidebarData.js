@@ -1,9 +1,6 @@
 // Sidebar.js
 import React from 'react';
-//import { Nav, Navbar, Button } from 'react-bootstrap';
 import { HouseDoor, Bell, Envelope, Person } from 'react-bootstrap-icons';
-//import { Link } from 'react-router-dom';
-//import './sidebar.css';
 
 const SidebarData = [
   {

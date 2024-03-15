@@ -1,56 +1,41 @@
-/* NavigationBar.css */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: "Lato", sans-serif;
-  }
-
-  .home,
-.container,
-.notification {
-  display: flex;
-  height: 90vh;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-  color: #fff;
-}
-
-/* Navbar CSS */
-.navbar {
-    background-color: #262020;
+ .top-navbar {
     height: 80px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 100px;
+    width: 100%;
+    border-bottom: 1px solid #bdbdbd;
+    
   }
-  
-  .menu-bars {
-    margin-left: 2rem;
+ 
+  .top-navbar .menu-bars {
+    margin-left: 1rem;
     font-size: 1rem;
     background: none;
-    color: #000;
+    color: #0f2553;
+    display: none;
+    
   }
   
   .nav-menu {
-    background-color: #8f2727;
-    width: 250px;
+    background-color: #f8f9fa;;
+    width: 350px;
     height: 100vh;
     display: flex;
     justify-content: center;
     position: fixed;
     top: 0;
-    left: -100%;
+    left: 0%;
+    /* left: -100%;  */
     transition: 850ms;
+    border-right: 1px solid #bdbdbd;
+    z-index: 1000;
   }
-  
   .nav-menu.active {
     left: 0;
     transition: 450ms;
   }
-  
+   
   .nav-text {
     display: flex;
     justify-content: flex-start;
@@ -60,7 +45,7 @@
     height: 60px;
   }
   
-  .nav-text a {
+   .nav-text a {
     text-decoration: none;
     color: #151414;
     font-size: 18px;
@@ -70,26 +55,26 @@
     align-items: center;
     padding: 0 16px;
     border-radius: 4px;
-  }
+  } 
   
   .nav-text a:hover {
-    background-color: #000000;
-    color: #fff;
+    background-color: #dee2e6;
+   
   }
   
   .nav-menu-items {
     width: 100%;
+    padding: 200px 0 0 0;
   }
-  
-  .navbar-toggle {
-    background-color: #ffffff;
-    width: 100%;
-    height: 80px;
+
+  /* media queries */
+  @media(max-width:460px) {
+
+  }
+
+  /* Tab-switcher 
+  .top-navbar .tab-button{
     display: flex;
-    justify-content: flex-start;
     align-items: center;
-  }
-  
-  span {
-    margin-left: 16px;
-  }
+    justify-content: center;
+  }*/

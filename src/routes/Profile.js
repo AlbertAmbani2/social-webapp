@@ -1,6 +1,7 @@
 // src/Profile.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Col } from 'react-bootstrap';
 import { ArrowLeft } from 'react-bootstrap-icons';
 import Posts from '../Posts';
 import UsersList from '../usersList';
@@ -69,6 +70,8 @@ const Profile = ({ user, onLogout }) => {
         </div>
       </div>
 
+
+     <Col md={9}>
       <div className="card mt-3">
         <div className="card-body">
           <h5 className="card-title">My Posts</h5>
@@ -83,7 +86,7 @@ const Profile = ({ user, onLogout }) => {
           )}
         </div>
       </div>
-
+     </Col>
     </div>
   );
 };

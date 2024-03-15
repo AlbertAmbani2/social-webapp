@@ -10,10 +10,16 @@ import { IconContext } from 'react-icons';
 
 function NavigationBar() {
   const [sidebar, setSidebar] = useState(false);
+  const [activeTab, setActiveTab] = useState('feed');
 
   const showSidebar = () => setSidebar(!sidebar);
 
-  const { activeTab, handleTabChange } = useTabs('feed');
+  //const { activeTab, handleTabChange } = useTabs('feed');
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    // Perform any other actions based on the tab switch
+  };
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -33,16 +39,33 @@ function NavigationBar() {
   }, [sidebar]);
 
   return (
-    <div className="container d-flex flex-column h-100">
+    <div className="container">
       <>
         <IconContext.Provider value={{ color: 'undefined' }}>
-          <div className="navbar">
+          <div className="top-navbar fixed-top bg-light">
             <Link to="#" >
               <Button variant="light" className="menu-bars" onClick={showSidebar}>
                 ☰
               </Button>
             </Link>
+            
+            <Button
+            variant={activeTab === 'feed' ? 'secondary' : 'light'}
+            onClick={() => handleTabChange('feed')}
+            className="tab-button"
+          >
+            News Feed
+          </Button>
+          <Button
+            variant={activeTab === 'following' ? 'secondary' : 'light'}
+            onClick={() => handleTabChange('following')}
+            className="tab-button"
+          >
+            Following
+          </Button>
+          
           </div>
+
           <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
             <ul className="nav-menu-items" onClick={showSidebar}>
               
@@ -58,12 +81,13 @@ function NavigationBar() {
               })}
             </ul>
           </nav>
+          
         </IconContext.Provider>
       </>
 
 
       {/* Bottom navigation bar */}
-      <nav className="navbar container fixed-bottom navbar-light bg-light mt-4">
+      <nav className="navbar container fixed-bottom bg-light mt-4 border">
         <ul className="navbar-nav flex-row justify-content-between w-100">
           <li className="nav-item">
             <Link to="/home" className="nav-link">
@@ -71,12 +95,12 @@ function NavigationBar() {
             </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <a className="nav-link" href="notification">
               <Bell size={24} className={`mx-4 ${activeTab === 'bell' ? 'active' : ''}`} />
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <a className="nav-link" href="message">
               <Envelope size={24} className={`mx-4 ${activeTab === 'envelope' ? 'active' : ''}`} />
             </a>
           </li>
