@@ -1,0 +1,123 @@
+.top-navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  border-bottom: 1px solid #e1e8ed;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  padding: 0 20px;
+  margin: 1rem;
+}
+
+.menu-bars {
+  font-size: 1.5rem;
+  background: none;
+  color: #0f2553;
+  cursor: pointer;
+  display: none;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* Add some spacing between tabs if needed */
+}
+
+.tab {
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.tab.active {
+  background-color: #f0f0f0; /* Change the background color of the active tab */
+}
+
+.nav-menu {
+  background-color: #f8f9fa;
+  width: 300px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
+  z-index: 100;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 450ms;
+}
+
+.nav-text {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 8px 0px 8px 16px;
+  list-style: none;
+  height: 60px;
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: #151414;
+  font-size: 18px;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
+}
+
+.nav-text a:hover {
+  background-color: #dee2e6;
+}
+
+.nav-menu-items {
+  width: 100%;
+  padding: 200px 0 0 0;
+}
+
+.container .navbar {
+  display: none;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .menu-bars {
+    display: block;
+    order: -1; /* Move the menu icon to the beginning */
+    margin-right: auto; /* Push the tabs to the right */
+    position: relative;
+  }
+
+  .nav-menu {
+    left: -100%;
+  }
+
+  .container .navbar {
+    display: block;
+  }
+}
+
+/* Media query for larger screens */
+@media (min-width: 768px) {
+  .menu-bars {
+    display: none; /* Hide the menu icon on larger screens */
+  }
+
+  .nav-menu {
+    left: 0; /* Ensure the menu is shown on larger screens */
+  }
+}

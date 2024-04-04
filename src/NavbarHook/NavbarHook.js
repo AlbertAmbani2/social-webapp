@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { IoMenu } from "react-icons/io5";
-// import { Button } from 'react-bootstrap';
 import { HouseDoor, Bell, Envelope } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 import { Tab, Tabs } from '@mui/material';
-import SidebarData from './components/sidebar/SidebarData';
-import './NavigationBar.css';
+import SidebarData from '../components/sidebar/SidebarData';
+import './NavbarHook.css';
 import { IconContext } from 'react-icons';
+import { useMediaQuery } from 'react-responsive'; // Step 1
 
 function NavigationBar() {
   const [sidebar, setSidebar] = useState(false);
   const [activeTab, setActiveTab] = useState('feed');
+  const isMobile = useMediaQuery({ maxWidth: '400px' }); // Step 2
 
   const showSidebar = () => setSidebar(!sidebar);
 
@@ -32,6 +33,12 @@ function NavigationBar() {
       document.removeEventListener('click', handleOutsideClick);
     };
   }, [sidebar]);
+
+  useEffect(() => {
+    if (isMobile) { // Step 3
+      setSidebar(false);
+    }
+  }, [isMobile]);
 
   return (
     <div className="container">
@@ -68,20 +75,22 @@ function NavigationBar() {
             </nav>
           </header>
           
-          <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-            <ul className="nav-menu-items" onClick={showSidebar}>
-              {SidebarData.map((item, index) => {
-                return (
-                  <li key={index} className={item.cName}>
-                    <Link to={item.path}>
-                      {item.icon}
-                      <span>{item.title}</span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+          {isMobile && ( // Step 3
+            <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+              <ul className="nav-menu-items" onClick={showSidebar}>
+                {SidebarData.map((item, index) => {
+                  return (
+                    <li key={index} className={item.cName}>
+                      <Link to={item.path}>
+                        {item.icon}
+                        <span>{item.title}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+          )}
         </IconContext.Provider>
       </>
       <nav className="navbar fixed-bottom bg-light mt-4 border">

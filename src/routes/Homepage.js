@@ -2,6 +2,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import NavigationBar from '../navigationBar';
+import NavbarHook from '../NavbarHook/NavbarHook';
 import '../NavigationBar.css';
 
 const HomePage = () => {
@@ -11,13 +12,14 @@ const HomePage = () => {
         {/* Sidebar component */}
         <Col md={3}>
           <NavigationBar />
+          <NavbarHook />
         </Col>
 
         {/* Main content */}
-        <Col md={6} className="flex-grow-1 mx-auto mt-4">
-          <div className="main-content bg-light border px-3 py-4">
+        {/* <Col md={6} className="flex-grow-1 mx-auto mt-4">
+          <div className="main-content bg-light border px-3 py-4"> */}
             {/* Your main content here */}
-            <div className="post">
+            {/* <div className="post">
               <div className="user-info">
                 <img src="user-avatar.jpg" alt="User Avatar" className="avatar" />
                 <div className="username">Username</div>
@@ -32,7 +34,7 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-        </Col>
+        </Col> */}
 
         {/* Additional column for widgets, trending, etc. */}
         <Col md={3}>
