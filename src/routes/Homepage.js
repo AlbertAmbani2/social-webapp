@@ -1,9 +1,9 @@
 // src/HomePage.js
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import NavigationBar from '../navigationBar';
-import NavbarHook from '../NavbarHook/NavbarHook';
-import '../NavigationBar.css';
+import NavigationBar from '../components/Navbars/navigationBar';
+//import NavbarHook from '../NavbarHook/NavbarHook';
+//import '../NavigationBar.css';
 
 const HomePage = () => {
   return (
@@ -12,7 +12,7 @@ const HomePage = () => {
         {/* Sidebar component */}
         <Col md={3}>
           <NavigationBar />
-          <NavbarHook />
+          {/* <NavbarHook /> */}
         </Col>
 
         {/* Main content */}

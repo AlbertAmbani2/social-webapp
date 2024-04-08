@@ -4,7 +4,11 @@ import axios from 'axios';
 
 const UserCard = ({ user, onFollowToggle }) => {
   return (
-    <div style={{ border: '1px solid #ddd', padding: '10px', margin: '10px', borderRadius: '5px', width: '200px', height: '150px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+    <div style={{ border: '1px solid #ddd',
+     padding: '10px', margin: '10px',
+      borderRadius: '5px', 
+      width: '200px', height: '150px',
+       display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
       <span>{user.name}</span>
       <button onClick={() => onFollowToggle(user)}>
         {user.isFollowing ? 'Unfollow' : 'Follow'}
@@ -37,7 +41,7 @@ const UsersList = ({ currentUser, onFollowToggle }) => {
 
   return (
     <div>
-      <h2>Users List</h2>
+      <i><h6>Users List</h6></i>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {users.map((user) => (
           <UserCard key={user.id} user={user} onFollowToggle={onFollowToggle} />

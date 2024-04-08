@@ -11,7 +11,7 @@ const Login = ({ onLogin }) => {
   const handleLogin = async () => {
     
     try {
-      // Replace 'YOUR_API_ENDPOINT' with the actual JSONPlaceholder API endpoint for users.
+      // JSONPlaceholder API endpoint for users.
       const response = await fetch('https://jsonplaceholder.typicode.com/users');
       const users = await response.json();
 

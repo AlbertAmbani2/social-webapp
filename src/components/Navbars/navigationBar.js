@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { AppBar, Toolbar, IconButton, Typography, Tab, Tabs } from '@mui/material';
 import { IoMenu } from "react-icons/io5";
-// import { Button } from 'react-bootstrap';
 import { HouseDoor, Bell, Envelope } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
-import { Tab, Tabs } from '@mui/material';
-import SidebarData from './components/sidebar/SidebarData';
+import SidebarData from '../sidebar/SidebarData';
 import './NavigationBar.css';
 import { IconContext } from 'react-icons';
 
@@ -16,7 +15,6 @@ function NavigationBar() {
 
   const handleTabChange = (event, newTab) => {
     setActiveTab(newTab);
-    // Perform any other actions based on the tab switch
   };
 
   useEffect(() => {
@@ -37,22 +35,35 @@ function NavigationBar() {
     <div className="container">
       <>
         <IconContext.Provider value={{ color: 'undefined' }}>
-          <header className="top-navbar fixed-top bg-light d-flex justify-content-center align-items-center">
-          <nav className="nav container d-flex align-items-center">
-              <div className="menu-bars" onClick={showSidebar}>
+          <AppBar position="fixed" className="top-navbar"
+           sx={{ borderBottom: '1px solid #e1e8ed',
+            boxShadow: 'none',
+             backgroundColor: 'lightgray' }}>
+            <Toolbar>
+              <IconButton
+                edge="start"
+                className="menu-bars"
+                color="inherit"
+                aria-label="menu"
+                onClick={showSidebar}
+                style={{ color: 'grey' }}
+              >
                 <IoMenu />
-              </div>
-
+              </IconButton>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style={{ color: 'grey' }}>
+                My App
+              </Typography>
               <Tabs
                 value={activeTab}
                 className="tabs"
                 onChange={handleTabChange}
+                //TabIndicatorProps={{ style: { backgroundColor: '#fffff' } }}
               >
                 <Tab
                   label="News Feed"
                   value="feed"
                   className={`tab ${activeTab === 'feed' ? 'active' : ''}`}
-                  sx={{                  
+                  sx={{
                     textTransform: 'none',
                   }}
                 />
@@ -60,14 +71,14 @@ function NavigationBar() {
                   label="Following"
                   value="following"
                   className={`tab ${activeTab === 'following' ? 'active' : ''}`}
-                  sx={{                  
+                  sx={{
                     textTransform: 'none',
                   }}
                 />
               </Tabs>
-            </nav>
-          </header>
-          
+            </Toolbar>
+          </AppBar>
+          {/* sidebar */}
           <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
             <ul className="nav-menu-items" onClick={showSidebar}>
               {SidebarData.map((item, index) => {
@@ -84,6 +95,7 @@ function NavigationBar() {
           </nav>
         </IconContext.Provider>
       </>
+      {/* Bottom navigation bar */}
       <nav className="navbar fixed-bottom bg-light mt-4 border">
         <ul className="navbar-nav flex-row justify-content-between w-100">
           <li className="nav-item">
