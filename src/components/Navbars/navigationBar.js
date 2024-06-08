@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Tab, Tabs } from '@mui/material';
 import { IoMenu } from "react-icons/io5";
 import { HouseDoor, Bell, Envelope } from 'react-bootstrap-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SidebarData from '../sidebar/SidebarData';
 import './NavigationBar.css';
 import { IconContext } from 'react-icons';
@@ -10,11 +10,13 @@ import { IconContext } from 'react-icons';
 function NavigationBar() {
   const [sidebar, setSidebar] = useState(false);
   const [activeTab, setActiveTab] = useState('feed');
+  const navigate = useNavigate();
 
   const showSidebar = () => setSidebar(!sidebar);
 
   const handleTabChange = (event, newTab) => {
     setActiveTab(newTab);
+    navigate(`/${newTab}`);
   };
 
   useEffect(() => {
@@ -63,6 +65,8 @@ function NavigationBar() {
                   label="News Feed"
                   value="feed"
                   className={`tab ${activeTab === 'feed' ? 'active' : ''}`}
+                  component={Link}
+                  to="/feed"
                   sx={{
                     textTransform: 'none',
                   }}
@@ -71,6 +75,8 @@ function NavigationBar() {
                   label="Following"
                   value="following"
                   className={`tab ${activeTab === 'following' ? 'active' : ''}`}
+                  component={Link}
+                  to="/following"
                   sx={{
                     textTransform: 'none',
                   }}
